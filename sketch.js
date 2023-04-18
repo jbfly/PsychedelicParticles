@@ -76,29 +76,34 @@ function createUI() {
   });
 
   numParticlesSlider = createSlider(0, 300, 100);
-  numParticlesSlider.position(20, height - 140);
+  numParticlesSlider.position(20, height - 180);
   numParticlesSlider.style('width', '100px');
+  numParticlesSlider.style('rotate', '-90deg');
   numParticlesLabel = createP('Particle Count');
-  numParticlesLabel.position(20, height - 170);
+  numParticlesLabel.position(5, height - 220);
+  numParticlesLabel.style('rotate', '90deg');
 
   planetGravitySlider = createSlider(0, 5, 1, 0.1);
-  planetGravitySlider.position(80, height - 80);
+  planetGravitySlider.position(80, height - 180);
   planetGravitySlider.style('width', '100px');
+  planetGravitySlider.style('rotate', '-90deg');
   planetGravityLabel = createP('Planet Gravity');
-  planetGravityLabel.position(80, height - 110);
+  planetGravityLabel.position(65, height - 220);
+  planetGravityLabel.style('rotate', '90deg');
 
   cursorGravitySlider = createSlider(0, 5, 2, 0.1);
-  cursorGravitySlider.position(20, height - 80);
+  cursorGravitySlider.position(20, height - 60);
   cursorGravitySlider.style('width', '100px');
   cursorGravityLabel = createP('Cursor Gravity');
-  cursorGravityLabel.position(20, height - 110);
+  cursorGravityLabel.position(5, height - 90);
 
   downwardGravitySlider = createSlider(0, 1, 0.1, 0.01);
-  downwardGravitySlider.position(80, height - 140);
+  downwardGravitySlider.position(80, height - 60);
   downwardGravitySlider.style('width', '100px');
   downwardGravityLabel = createP('Downward Gravity');
-  downwardGravityLabel.position(80, height - 170);
+  downwardGravityLabel.position(65, height - 90);
 }
+
   
 function showUI() {
   numParticlesSlider.show();
