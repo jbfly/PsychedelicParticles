@@ -20,6 +20,17 @@ let planetGravityLabel;
 let cursorGravityLabel;
 let downwardGravityLabel;
 
+//Color Array
+const colors = [
+  [255, 0, 0],
+  [0, 255, 0],
+  [0, 0, 255],
+  [255, 255, 0],
+  [255, 0, 255],
+  [0, 255, 255],
+];
+
+let currentColorIndex = 0;
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
@@ -32,7 +43,12 @@ function setup() {
 }
 
 function draw() {
-  background(frameCount % 256, 50, 100, 25);
+  background(colors[currentColorIndex][0], colors[currentColorIndex][1], colors[currentColorIndex][2], 25);
+
+  if (frameCount % 120 === 0) {
+    currentColorIndex = (currentColorIndex + 1) % colors.length;
+  }
+   
   let contrastColor = getContrastColor(frameCount % 256);
   fill(contrastColor);
 
