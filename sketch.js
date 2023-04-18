@@ -20,17 +20,11 @@ let planetGravityLabel;
 let cursorGravityLabel;
 let downwardGravityLabel;
 
-//Color Array
-const colors = [
-  [255, 0, 0],
-  [0, 255, 0],
-  [0, 0, 255],
-  [255, 255, 0],
-  [255, 0, 255],
-  [0, 255, 255],
-];
+let fromColor;
+let toColor;
+let colorLerpValue = 0;
 
-let currentColorIndex = 0;
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
@@ -40,14 +34,25 @@ function setup() {
   for (let i = 0; i < numParticles; i++) {
     particles.push(new Particle(random(width), random(height)));
   }
+    // Initialize colors
+    fromColor = color(255, 0, 0);
+    toColor = color(0, 255, 0);
 }
 
 function draw() {
-  background(colors[currentColorIndex][0], colors[currentColorIndex][1], colors[currentColorIndex][2], 25);
-
-  if (frameCount % 120 === 0) {
-    currentColorIndex = (currentColorIndex + 1) % colors.length;
+  
+  const currentColor = lerpColor(fromColor, toColor, colorLerpValue);
+  background(currentColor.levels[0], currentColor.levels[1], currentColor.levels[2], 25);
+  colorLerpValue += 0.005;
+  if (colorLerpValue >= 1) {
+    colorLerpValue = 0;
+    fromColor = toColor;
+    toColor = color(random(255), random(255), random(255));
   }
+
+ // if (frameCount % 120 === 0) {
+//    currentColorIndex = (currentColorIndex + 1) % colors.length;
+//  }
    
   let contrastColor = getContrastColor(frameCount % 256);
   fill(contrastColor);
