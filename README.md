@@ -1,5 +1,5 @@
 # ChatGPT-p5js-Sketch
-
+[Live at bonewitz.net](https://bonewitz.net/p5/psychedelic)
 This p5.js sketch was primarily created by ChatGPT, an AI model from OpenAI, with minimal input from the human assistant. The project showcases the AI's programming abilities by creating an interactive particle simulation in p5.js. Users can interact with particles on the canvas, apply gravity, and see the particles react to a central "planet."
 
 ## Table of Contents
@@ -19,7 +19,7 @@ This p5.js sketch was primarily created by ChatGPT, an AI model from OpenAI, wit
 - Scattering effect when the user clicks on the canvas.
 
 ## Installation
-[See now at bonewitz.net](https://bonewitz.net/p5/psychedelic)
+
 1. Ensure you have p5.js installed. If not, download it from [here](https://p5js.org/download/).
 2. Clone this repository to your local machine.
 3. Open the `index.html` file in your browser.
