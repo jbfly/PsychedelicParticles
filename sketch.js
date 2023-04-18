@@ -30,7 +30,16 @@ function setup() {
 
 function draw() {
   background(frameCount % 256, 50, 100, 25);
+  let contrastColor = getContrastColor(frameCount % 256);
+  fill(contrastColor);
 
+
+   // Add this line to set the text color of the labels
+   numParticlesLabel.style('color', `rgb(${contrastColor}, ${contrastColor}, ${contrastColor})`);
+   planetGravityLabel.style('color', `rgb(${contrastColor}, ${contrastColor}, ${contrastColor})`);
+   cursorGravityLabel.style('color', `rgb(${contrastColor}, ${contrastColor}, ${contrastColor})`);
+   downwardGravityLabel.style('color', `rgb(${contrastColor}, ${contrastColor}, ${contrastColor})`);
+ 
   // Update variables based on UI
   numParticles = numParticlesSlider.value();
   const planetGravity = planetGravitySlider.value();
@@ -84,24 +93,32 @@ function createUI() {
   numParticlesLabel.style('rotate', '90deg');
 
   planetGravitySlider = createSlider(0, 5, 1, 0.1);
-  planetGravitySlider.position(80, height - 180);
+  planetGravitySlider.position(60, height - 180);
   planetGravitySlider.style('width', '100px');
   planetGravitySlider.style('rotate', '-90deg');
   planetGravityLabel = createP('Planet Gravity');
-  planetGravityLabel.position(65, height - 220);
+  planetGravityLabel.position(45, height - 220);
   planetGravityLabel.style('rotate', '90deg');
 
   cursorGravitySlider = createSlider(0, 5, 2, 0.1);
-  cursorGravitySlider.position(20, height - 60);
+  cursorGravitySlider.position(100, height - 180);
   cursorGravitySlider.style('width', '100px');
+  cursorGravitySlider.style('rotate', '-90deg');
   cursorGravityLabel = createP('Cursor Gravity');
-  cursorGravityLabel.position(5, height - 90);
+  cursorGravityLabel.position(85, height - 220);
+  cursorGravityLabel.style('rotate', '90deg');
 
   downwardGravitySlider = createSlider(0, 1, 0.1, 0.01);
-  downwardGravitySlider.position(80, height - 60);
+  downwardGravitySlider.position(140, height - 180);
   downwardGravitySlider.style('width', '100px');
-  downwardGravityLabel = createP('Downward Gravity');
-  downwardGravityLabel.position(65, height - 90);
+  downwardGravitySlider.style('rotate', '-90deg');f
+  downwardGravityLabel = createP('Downward Gravity [press g]');
+  downwardGravityLabel.position(80, height - 220);
+  downwardGravityLabel.style('rotate', '90deg');
+}
+
+function getContrastColor(colorValue) {
+  return (colorValue > 128) ? 0 : 255;
 }
 
   
