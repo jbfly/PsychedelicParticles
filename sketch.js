@@ -11,6 +11,12 @@ let planetGravitySlider;
 let cursorGravitySlider;
 let downwardGravitySlider;
 
+// Add UI element variables
+let numParticlesLabel;
+let planetGravityLabel;
+let cursorGravityLabel;
+let downwardGravityLabel;
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
@@ -64,44 +70,59 @@ function draw() {
 
 function createUI() {
   manipulativesBtn = createButton('manipulatives');
-  manipulativesBtn.position(20, height - 50);
+  manipulativesBtn.position(50, height - 110);
   manipulativesBtn.mousePressed(() => {
     manipulativesVisible = !manipulativesVisible;
   });
 
   numParticlesSlider = createSlider(0, 300, 100);
-  numParticlesSlider.position(20, height - 100);
-  numParticlesSlider.style('width', '200px');
-  numParticlesSlider.style('rotate', '90deg');
+  numParticlesSlider.position(20, height - 140);
+  numParticlesSlider.style('width', '100px');
+  numParticlesLabel = createP('Particle Count');
+  numParticlesLabel.position(20, height - 170);
 
   planetGravitySlider = createSlider(0, 5, 1, 0.1);
-  planetGravitySlider.position(width - 60, height - 100);
-  planetGravitySlider.style('width', '200px');
-  planetGravitySlider.style('rotate', '90deg');
+  planetGravitySlider.position(80, height - 80);
+  planetGravitySlider.style('width', '100px');
+  planetGravityLabel = createP('Planet Gravity');
+  planetGravityLabel.position(80, height - 110);
 
   cursorGravitySlider = createSlider(0, 5, 2, 0.1);
-  cursorGravitySlider.position(width - 120, height - 100);
-    cursorGravitySlider.style('width', '200px');
-    cursorGravitySlider.style('rotate', '90deg');
+  cursorGravitySlider.position(20, height - 80);
+  cursorGravitySlider.style('width', '100px');
+  cursorGravityLabel = createP('Cursor Gravity');
+  cursorGravityLabel.position(20, height - 110);
+
+  downwardGravitySlider = createSlider(0, 1, 0.1, 0.01);
+  downwardGravitySlider.position(80, height - 140);
+  downwardGravitySlider.style('width', '100px');
+  downwardGravityLabel = createP('Downward Gravity');
+  downwardGravityLabel.position(80, height - 170);
+}
   
-    downwardGravitySlider = createSlider(0, 1, 0.1, 0.01);
-    downwardGravitySlider.position(width / 2 - 100, height - 20);
-    downwardGravitySlider.style('width', '200px');
-  }
+function showUI() {
+  numParticlesSlider.show();
+  planetGravitySlider.show();
+  cursorGravitySlider.show();
+  downwardGravitySlider.show();
+  numParticlesLabel.show();
+  planetGravityLabel.show();
+  cursorGravityLabel.show();
+  downwardGravityLabel.show();
+}
+
   
-  function showUI() {
-    numParticlesSlider.show();
-    planetGravitySlider.show();
-    cursorGravitySlider.show();
-    downwardGravitySlider.show();
-  }
-  
-  function hideUI() {
-    numParticlesSlider.hide();
-    planetGravitySlider.hide();
-    cursorGravitySlider.hide();
-    downwardGravitySlider.hide();
-  }
+function hideUI() {
+  numParticlesSlider.hide();
+  planetGravitySlider.hide();
+  cursorGravitySlider.hide();
+  downwardGravitySlider.hide();
+  numParticlesLabel.hide();
+  planetGravityLabel.hide();
+  cursorGravityLabel.hide();
+  downwardGravityLabel.hide();
+}
+
   
   function mousePressed() {
     for (const particle of particles) {
