@@ -111,7 +111,7 @@ function createUI() {
   downwardGravitySlider = createSlider(0, 1, 0.1, 0.01);
   downwardGravitySlider.position(140, height - 180);
   downwardGravitySlider.style('width', '100px');
-  downwardGravitySlider.style('rotate', '-90deg');f
+  downwardGravitySlider.style('rotate', '-90deg');
   downwardGravityLabel = createP('Downward Gravity [press g]');
   downwardGravityLabel.position(80, height - 220);
   downwardGravityLabel.style('rotate', '90deg');
