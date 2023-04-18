@@ -1,7 +1,7 @@
 const particles = [];
 let numParticles = 100;
 let gravityEnabled = false;
-const planetSize = 40;
+let planetSize = 40;
 
 // UI elements
 let manipulativesBtn;
@@ -10,6 +10,9 @@ let numParticlesSlider;
 let planetGravitySlider;
 let cursorGravitySlider;
 let downwardGravitySlider;
+let planetSizeSlider;
+let planetSizeLabel;
+
 
 // Add UI element variables
 let numParticlesLabel;
@@ -39,7 +42,8 @@ function draw() {
    planetGravityLabel.style('color', `rgb(${contrastColor}, ${contrastColor}, ${contrastColor})`);
    cursorGravityLabel.style('color', `rgb(${contrastColor}, ${contrastColor}, ${contrastColor})`);
    downwardGravityLabel.style('color', `rgb(${contrastColor}, ${contrastColor}, ${contrastColor})`);
- 
+   planetSizeLabel.style('color', `rgb(${contrastColor}, ${contrastColor}, ${contrastColor})`);
+
   // Update variables based on UI
   numParticles = numParticlesSlider.value();
   const planetGravity = planetGravitySlider.value();
@@ -60,7 +64,8 @@ function draw() {
   const planetPos = createVector(width / 2, height / 2);
   fill((frameCount * 2) % 256, 100, 255);
   ellipse(planetPos.x, planetPos.y, planetSize);
-
+  planetSize = planetSizeSlider.value();
+  
   for (const particle of particles) {
     particle.update();
     particle.display();
@@ -92,7 +97,7 @@ function createUI() {
   numParticlesLabel.position(5, height - 220);
   numParticlesLabel.style('rotate', '90deg');
 
-  planetGravitySlider = createSlider(0, 5, 1, 0.1);
+  planetGravitySlider = createSlider(0, 20, 1, 0.1); // Increase max value from 5 to 10  
   planetGravitySlider.position(60, height - 180);
   planetGravitySlider.style('width', '100px');
   planetGravitySlider.style('rotate', '-90deg');
@@ -115,6 +120,14 @@ function createUI() {
   downwardGravityLabel = createP('Downward Gravity [press g]');
   downwardGravityLabel.position(80, height - 220);
   downwardGravityLabel.style('rotate', '90deg');
+
+  planetSizeSlider = createSlider(10, 200, planetSize, 1);
+  planetSizeSlider.position(180, height - 180);
+  planetSizeSlider.style('width', '100px');
+  planetSizeSlider.style('rotate', '-90deg');
+  planetSizeLabel = createP('Planet Size');
+  planetSizeLabel.position(180, height - 220);
+  planetSizeLabel.style('rotate', '90deg');
 }
 
 function getContrastColor(colorValue) {
@@ -131,6 +144,8 @@ function showUI() {
   planetGravityLabel.show();
   cursorGravityLabel.show();
   downwardGravityLabel.show();
+  planetSizeLabel.show();
+  planetSizeSlider.show();
 }
 
   
@@ -143,6 +158,8 @@ function hideUI() {
   planetGravityLabel.hide();
   cursorGravityLabel.hide();
   downwardGravityLabel.hide();
+  planetSizeLabel.hide();
+  planetSizeSlider.hide();
 }
 
   
@@ -164,6 +181,7 @@ function hideUI() {
       this.vel = createVector();
       this.acc = createVector();
       this.size = random(4, 10);
+      this.mass = this.size * 0.1;
     }
   
     update() {
@@ -201,21 +219,25 @@ function hideUI() {
       this.acc.add(gravity);
     }
   
-    applyGravityToPlanet(planetPos, strength) {
+    applyGravityToPlanet(planetPos) {
       const force = p5.Vector.sub(planetPos, this.pos);
       const distanceSq = constrain(force.magSq(), 100, 10000);
-      const G = strength;
-      const gForce = (G * planetSize) / distanceSq;
-      force.setMag(gForce);
+      const G = 1;
+      const strength = (G * planetSize * this.mass) / distanceSq;
+      force.setMag(strength);
       this.acc.add(force);
     }
   
     checkEdges() {
-      if (this.pos.x < 0 || this.pos.x > width) {
+      if (this.pos.x < -100 || this.pos.x > width + 100) {
         this.vel.x *= -1;
       }
-      if (this.pos.y < 0 || this.pos.y > height) {
+    
+      if (this.pos.y < 0) {
         this.vel.y *= -0.9;
+      } else if (this.pos.y > height && gravityEnabled) {
+        this.vel.y *= -0.9;
+        this.pos.y = height;
       }
     }
   }
